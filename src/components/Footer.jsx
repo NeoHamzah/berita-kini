@@ -24,13 +24,13 @@ export default function Footer() {
           <div className="text-white">
             <div className="font-semibold text-2xl">Telusuri</div>
             <div className="font-inter font-light text-lg flex flex-col gap-4 mt-6">
-              <Link>Beranda</Link>
-              <Link>Kesehatan</Link>
-              <Link>Otomotif</Link>
-              <Link>Politik</Link>
-              <Link>Olahraga</Link>
-              <Link>Nasional</Link>
-              <Link>Internasional</Link>
+              <Link to={'/'}>Beranda</Link>
+              <Link to={'/kesehatan'}>Kesehatan</Link>
+              <Link to={'/otomotif'}>Otomotif</Link>
+              <Link to={'/politik'}>Politik</Link>
+              <Link to={'/olahraga'}>Olahraga</Link>
+              <Link to={'/nasional'}>Nasional</Link>
+              <Link to={'/internasional'}>Internasional</Link>
             </div>
           </div>
           <div className="text-white">

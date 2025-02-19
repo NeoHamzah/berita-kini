@@ -28,12 +28,12 @@ export default function Navbar() {
 
         <div className={`font-inter flex gap-8 transition-all duration-500 ${navBg ? 'text-white' : 'text-gray-400' } text-gray-500`}>
           <Link to={'/'}>Beranda</Link>
-          <Link to={'/'}>Terbaru</Link>
-          <Link to={'/'}>Hiburan</Link>
-          <Link to={'/'}>Gaya Hidup</Link>
-          <Link to={'/'}>Olahraga</Link>
-          <Link to={'/'}>Nasional</Link>
-          <Link to={'/'}>Internasional</Link>
+          <Link to={'/terbaru'}>Terbaru</Link>
+          <Link to={'/hiburan'}>Hiburan</Link>
+          <Link to={'/gayaHidup'}>Gaya Hidup</Link>
+          <Link to={'/olahraga'}>Olahraga</Link>
+          <Link to={'/nasional'}>Nasional</Link>
+          <Link to={'/internasional'}>Internasional</Link>
         </div>
       </div>
     </div>

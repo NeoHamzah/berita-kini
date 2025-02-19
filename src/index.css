@@ -7,3 +7,23 @@
   --font-nunito: Nunito Sans, "serif";
 }
 
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #99a1af;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #0090FF;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #00477e;
+}
