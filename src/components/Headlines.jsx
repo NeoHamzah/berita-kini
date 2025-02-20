@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useFetchBerita } from '../hooks/useFetchBerita';
 
 export default function Beranda() {
@@ -9,6 +9,11 @@ export default function Beranda() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [limitedData, setLimitedData] = useState([]);
   const intervalRef = useRef(null);
+  const navigate = useNavigate();
+
+  const handleClick = (item) => {
+    navigate(`/${kategori}/detail`, { state: { item } });
+  };
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -79,13 +84,15 @@ export default function Beranda() {
           <div className="font-bold text-4xl">{currentPost.title}</div>
           <div className="font-inter text-lg font-normal">{currentPost.description}</div>
           <div className="flex flex-row items-center gap-2 font-normal text-sm">
-            <img className='w-[14px] h-[14px]' src={'/calendar.png'} alt="calendar" />
+            <img className="w-[14px] h-[14px]" src={'/calendar.png'} alt="calendar" />
             {formatDate(currentPost.pubDate)}
           </div>
-          <div className='flex flex-row items-center gap-2 text-[#0090FF] font-medium text-lg'>
+          <div 
+          onClick={() => handleClick(currentPost)}
+          className="flex flex-row items-center gap-2 text-[#0090FF] font-medium text-lg cursor-pointer">
             Baca Selengkapnya
-            <img className='w-[12px] h-[12px]' src={"/arrow_up.png"} alt="" />
-            </div>
+            <img className="w-[12px] h-[12px]" src={'/arrow_up.png'} alt="" />
+          </div>
         </div>
 
         <div>

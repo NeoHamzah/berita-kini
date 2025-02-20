@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useFetchBerita } from '../hooks/useFetchBerita';
 
 export default function Rekomendasi() {
@@ -11,6 +11,11 @@ export default function Rekomendasi() {
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 8;
+  const navigate = useNavigate()
+
+  const handleClick = (item) => {
+    navigate(`/${kategori}/detail`, { state: { item } });
+  };
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -75,7 +80,10 @@ export default function Rekomendasi() {
       <div className='w-full'>
         <div className="grid grid-cols-4 gap-4 justify-center place-items-center">
           {filteredData.map((item, index) => (
-            <div key={index} className="flex flex-col mt-12 w-fit">
+            <div 
+            key={index} 
+            onClick={() => handleClick(item)}
+            className="flex flex-col mt-12 w-fit">
               <div className="w-fit">
                 <img className="w-[350px] h-[290px] rounded-xl" src={item.thumbnail} alt="" />
               </div>

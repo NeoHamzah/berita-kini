@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useFetchBerita } from '../hooks/useFetchBerita';
 
-export default function BeritaTerbaru({rotation}) {
+export default function BeritaTerbaru({ rotation }) {
   const { slug_kategori } = useParams();
   const kategori = slug_kategori || 'teknologi';
   const { data, loading, error } = useFetchBerita(kategori);
   const [limitedData, setLimitedData] = useState([]);
+  const navigate = useNavigate();
+
+  const handleClick = (item) => {
+    navigate(`/${kategori}/detail`, { state: { item } });
+  };
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -17,6 +22,7 @@ export default function BeritaTerbaru({rotation}) {
   const formatString = (stringInput) => {
     return stringInput.replace(/([a-z])([A-Z])/g, '$1 $2').replace(/^\w/, (c) => c.toUpperCase());
   };
+
   useEffect(() => {
     if (data && data.posts) {
       const limitedPosts = data.posts.slice(5, 8);
@@ -36,18 +42,23 @@ export default function BeritaTerbaru({rotation}) {
     return <div>No data available</div>;
   }
 
+
   return (
     <div className="px-18 flex flex-col w-full">
       <div className="font-bold text-2xl border-l-2 border-blue-500 pl-5">Berita Terbaru</div>
 
-      <div className={`flex ${rotation == "vertical" ? "flex-col" : "flex-row"  } gap-4`}>
+      <div className={`flex ${rotation === "vertical" ? "flex-col" : "flex-row"} gap-4`}>
         {limitedData.map((item, index) => (
-          <div key={index} className="flex flex-row mt-12 px-4 w-full">
-            <div className={`${rotation == "vertical" ? "w-fit" : "w-1/3"}`}>
+          <div
+            key={index}
+            onClick={() => handleClick(item)}
+            className="flex flex-row mt-12 px-4 w-full cursor-pointer"
+          >
+            <div className={`${rotation === "vertical" ? "w-fit" : "w-1/3"}`}>
               <div className='absolute z-10 text-white bg-[#1F2B39] rounded-full w-9 h-9 flex items-center justify-center -mt-3 -ml-3'>
-                {index+1}
+                {index + 1}
               </div>
-              <img className={`${rotation == "vertical" ? "w-[200px]" : "w-full"} h-auto rounded-xl`} src={item.thumbnail} alt="" />
+              <img className={`${rotation === "vertical" ? "w-[200px]" : "w-full"} h-[120px] rounded-xl`} src={item.thumbnail} alt="" />
             </div>
             <div className="w-2/3 ml-4">
               <div className="font-bold text-lg line-clamp-3">{item.title}</div>
