@@ -20,7 +20,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <div className={`w-full fixed transition-colors duration-300 ${navBg ? 'bg-blue-500' : 'bg-transparent'}`}>
+    <div className={`w-full fixed transition-colors duration-300 z-50 ${navBg ? 'bg-blue-500' : 'bg-transparent'}`}>
       <div className="py-8 px-20 flex items-center justify-between">
         <div>
           <img className='max-w-40' src={ navBg ? '/Logo_white.png' :'/Logo_wtxt.png'} alt="logo" />

@@ -43,7 +43,7 @@ export default function BeritaTerbaru({rotation}) {
       <div className={`flex ${rotation == "vertical" ? "flex-col" : "flex-row"  } gap-4`}>
         {limitedData.map((item, index) => (
           <div key={index} className="flex flex-row mt-12 px-4 w-full">
-            <div className={`${rotation == "vertical" ? "w-fzz" : "w-1/3"}`}>
+            <div className={`${rotation == "vertical" ? "w-fit" : "w-1/3"}`}>
               <div className='absolute z-10 text-white bg-[#1F2B39] rounded-full w-9 h-9 flex items-center justify-center -mt-3 -ml-3'>
                 {index+1}
               </div>
