@@ -49,7 +49,7 @@ export default function Beranda() {
   const currentPost = limitedData[currentIndex];
 
   return (
-    <div className="w-full flex flex-col pt-60 pb-96 px-18">
+    <div className="w-full flex flex-col pt-60 pb-28 px-18">
       <div className="flex flex-row justify-between">
         <div className="max-w-[40%] flex flex-col gap-4">
           <div className="font-inter font-semibold text-xl">Headline</div>
@@ -70,7 +70,7 @@ export default function Beranda() {
         </div>
       </div>
 
-      <div className="mt-14 font-inter text-xl font-medium flex items-center justify-center gap-6">
+      <div className="mt-28 font-inter text-xl font-medium flex items-center justify-center gap-6">
         <button onClick={prevHeadline} className="border-none p-2 cursor-pointer">
           &lt;
         </button>
