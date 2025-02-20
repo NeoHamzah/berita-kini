@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { useFetchBerita } from '../hooks/useFetchBerita';
 
@@ -8,6 +8,7 @@ export default function Beranda() {
   const { data, loading, error } = useFetchBerita(kategori);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [limitedData, setLimitedData] = useState([]);
+  const intervalRef = useRef(null);
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -22,6 +23,18 @@ export default function Beranda() {
     }
   }, [data]);
 
+  useEffect(() => {
+    resetInterval();
+    return () => clearInterval(intervalRef.current);
+  }, [limitedData, currentIndex]);
+
+  const resetInterval = () => {
+    clearInterval(intervalRef.current);
+    intervalRef.current = setInterval(() => {
+      nextHeadline();
+    }, 3000);
+  };
+
   const nextHeadline = () => {
     if (limitedData.length > 0) {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % limitedData.length);
@@ -32,6 +45,16 @@ export default function Beranda() {
     if (limitedData.length > 0) {
       setCurrentIndex((prevIndex) => (prevIndex - 1 + limitedData.length) % limitedData.length);
     }
+  };
+
+  const handleNext = () => {
+    nextHeadline();
+    resetInterval();
+  };
+
+  const handlePrev = () => {
+    prevHeadline();
+    resetInterval();
   };
 
   if (loading) {
@@ -71,13 +94,13 @@ export default function Beranda() {
       </div>
 
       <div className="mt-28 font-inter text-xl font-medium flex items-center justify-center gap-6">
-        <button onClick={prevHeadline} className="border-none p-2 cursor-pointer">
+        <button onClick={handlePrev} className="border-none p-2 cursor-pointer">
           &lt;
         </button>
         <span className="mx-2">
           {currentIndex + 1} dari {limitedData.length}
         </span>
-        <button onClick={nextHeadline} className="border-none p-2 cursor-pointer">
+        <button onClick={handleNext} className="border-none p-2 cursor-pointer">
           &gt;
         </button>
       </div>

@@ -7,14 +7,14 @@ import { AosInit } from './lib/aos'
 
 function App() {
   return (
-    <div className='font-nunito h-[3000px]'>
+    <div className='font-nunito'>
     <Navbar />
     <main>
         <AosInit>
           <Router />
         </AosInit>
       </main>
-    {/* <Footer /> */}
+    <Footer />
     </div>
   )
 }
